@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEditor;
-
+ 
 [CustomEditor(typeof(LevelData))]
-public class LevelDataInspector : Editor
+public class SomeClassInspector : Editor
 {
-    private int _firstDimensionSize;
-    private int _secondDimensionSize;
-    private bool _editMode;
-    
-      public override void OnInspectorGUI()
+    int firstDimensionSize;
+    int secondDimensionSize;
+    string confirmation;
+    bool editMode;
+ 
+    public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
         var someClass = (LevelData)target;
@@ -18,53 +19,55 @@ public class LevelDataInspector : Editor
         SetupArray(someClass);
     }
 
-      private bool CanCreateNewArray()
+    private bool CanCreateNewArray()
     {
         EditorGUILayout.BeginHorizontal();
-        if(GUILayout.Button("Create New Level")) _editMode = true;
-        if(GUILayout.Button("Cancel")) _editMode = false;
+        if(GUILayout.Button("Create A New Level Layout")) editMode = true;
+        if(GUILayout.Button("Cancel")) editMode = false;
         EditorGUILayout.EndHorizontal();
  
-        return _editMode;
+        return editMode;
     }
 
-      private void CreateNewArray(LevelData someClass)
+    private void CreateNewArray(LevelData someClass)
     {
         GetDimensions();
         if(ConfirmedCanCreate()) CreateArray(someClass);
     }
 
-      private void GetDimensions()
+    private void GetDimensions()
     {
-      /*  _firstDimensionSize = EditorGUILayout.IntField("Rows", _firstDimensionSize);
-        _secondDimensionSize = EditorGUILayout.IntField("Columns", _secondDimensionSize);*/
-      //_firstDimensionSize = (int)EditorGUILayout.Slider("Rows", _firstDimensionSize,1,5);
-      //_secondDimensionSize = (int)EditorGUILayout.Slider("Columns", _secondDimensionSize,1,11);
-      _firstDimensionSize = 5;
-      _secondDimensionSize = 11;
+        firstDimensionSize = 5;//EditorGUILayout.IntField("First Dimension Size", firstDimensionSize);
+        secondDimensionSize = 11; //EditorGUILayout.IntField("Second Dimension Size", secondDimensionSize);
     }
 
-      private bool ConfirmedCanCreate()
+    private bool ConfirmedCanCreate()
     {
         EditorGUILayout.BeginHorizontal();
-        var canCreate = (GUILayout.Button("Set level layout"));
+        EditorGUILayout.LabelField("Type YES and press Create to create new level. This will clear your old level!!", EditorStyles.wordWrappedLabel);
+        confirmation = EditorGUILayout.TextField(confirmation);
+        EditorGUILayout.EndHorizontal();
+ 
+        EditorGUILayout.BeginHorizontal();
+        var canCreate = (GUILayout.Button("Create New Level Array") && confirmation == "YES");
         EditorGUILayout.EndHorizontal();
 
         if (!canCreate) return false;
-        _editMode = false;
+        confirmation = "";
+        editMode = false;
         return true;
     }
 
-      private void CreateArray(LevelData someClass)
+    private void CreateArray(LevelData someClass)
     {
-        someClass.levelLayout = new ArrayEnemy[_firstDimensionSize];
-        for(var i = 0; i < _firstDimensionSize; i++)
+        someClass.levelLayout = new ArrayEnemy[firstDimensionSize];
+        for(var i = 0; i < firstDimensionSize; i++)
         {
-            someClass.levelLayout[i] = new ArrayEnemy(_secondDimensionSize);
+            someClass.levelLayout[i] = new ArrayEnemy(secondDimensionSize);
         }
     }
 
-    private void SetupArray(LevelData someClass)
+    private static void SetupArray(LevelData someClass)
     {
         if (someClass.levelLayout == null || someClass.levelLayout.Length <= 0) return;
         foreach (var t in someClass.levelLayout)

@@ -6,6 +6,7 @@ public class BulletBehavior : MonoBehaviour
 {
     public float speed = 10f;
     public float lifeTime = 10f;
+    public int baseDamage = 1;
 
     private bool _canMove = false;
 
@@ -24,6 +25,15 @@ public class BulletBehavior : MonoBehaviour
     private void OnDisable()
     {
         _canMove = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        var enemy = other.gameObject.GetComponent<EnemyController>();
+        if (enemy != null)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator DestroyBullet()

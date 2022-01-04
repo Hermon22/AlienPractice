@@ -61,6 +61,11 @@ public class UIController : MonoBehaviour
         scoreText.text = ""+score;
     }
     
+    public void RestartScore()
+    {
+        scoreText.text = "";
+    }
+    
     public void CloseGame()
     {
        Application.Quit();

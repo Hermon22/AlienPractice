@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -13,5 +14,14 @@ public class EnemyController : MonoBehaviour
         _health = enemyInformation.Health;
         _enemyScore = enemyInformation.ScorePoints;
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        var bullet = other.gameObject.GetComponent<BulletBehavior>();
+        if (bullet == null) return;
+        _health -= bullet.baseDamage;
+        if (_health > 0) return;
+        GameController.Instance.UpdateScore(_enemyScore);
+        Destroy(gameObject);
+    }
 }
