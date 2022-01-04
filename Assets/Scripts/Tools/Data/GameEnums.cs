@@ -8,4 +8,5 @@ public class GameEnums
         Strong,
         None
     }
+    
 }

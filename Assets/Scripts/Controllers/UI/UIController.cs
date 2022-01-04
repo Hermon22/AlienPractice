@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
@@ -14,6 +15,14 @@ public class UIController : MonoBehaviour
     [Header("Main Menu")]
     [Space(10)]
     [SerializeField]private WindowsController mainMenu;
+    
+    [Header("Gameplay UI")]
+    [Space(10)]
+    [SerializeField]private WindowsController gameplayUI;
+    
+    [Header("Score UI")]
+    [Space(10)]
+    [SerializeField]private TextMeshProUGUI  scoreText;
 
     private void Awake()
     {
@@ -42,6 +51,16 @@ public class UIController : MonoBehaviour
         GameController.Instance.sceneController.ChangeScene("GameScene");
     }
     
+    public void PauseGame()
+    {
+      print("PAUSEEEEEEEEEEE");
+    }
+
+    public void UpdateScore(int score)
+    {
+        scoreText.text = ""+score;
+    }
+    
     public void CloseGame()
     {
        Application.Quit();
@@ -63,6 +82,8 @@ public class UIController : MonoBehaviour
         loadingScreen.OpenWindow();
         yield return new WaitForSeconds(0.5f);
         mainMenu.CloseWindow();
+        yield return new WaitForSeconds(0.5f);
+        gameplayUI.OpenWindow();
     }
     
     private IEnumerator LoadingDelay()
