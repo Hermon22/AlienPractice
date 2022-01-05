@@ -7,12 +7,14 @@ public class LevelData : ScriptableObject
     [SerializeField]private int index;
     [SerializeField]private Sprite background;
     [SerializeField]private float enemyMovementSpeed;
+    [SerializeField]private float enemySteps;
     
     public ArrayEnemy[] levelLayout;
 
     public int Index => index;
     public Sprite Background => background;
     public float EnemyMovementSpeed => enemyMovementSpeed;
+    public float EnemySteps => enemySteps;
 
 }
 

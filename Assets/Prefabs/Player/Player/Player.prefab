@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e7a8afd07b22546a16033abeb9e010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 10
+  maxDistance: 9
   turretPosition: {fileID: 6317671830365917539}
 --- !u!114 &6317671830195207924
 MonoBehaviour:

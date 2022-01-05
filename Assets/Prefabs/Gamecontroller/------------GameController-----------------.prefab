@@ -1670,7 +1670,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
-  m_SizeDelta: {x: 123.8916, y: 110.808}
+  m_SizeDelta: {x: 81.2066, y: 72.6308}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &2525892414787971080
 CanvasRenderer:
@@ -3330,6 +3330,7 @@ MonoBehaviour:
   listOfLevels:
   - {fileID: 11400000, guid: e90200b038799d7429d761e673a865be, type: 2}
   - {fileID: 11400000, guid: 46e7794f583762c4f991d23bb007f678, type: 2}
+  totalScore: 0
   levelIndex: 0
 --- !u!1 &2525892415688821284
 GameObject:

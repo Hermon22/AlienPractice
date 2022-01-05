@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   background: {fileID: 21300000, guid: 3c502840cf69faa43aabf0d1ba72e1a4, type: 3}
-  enemyMovementSpeed: 20
+  enemyMovementSpeed: 2
+  enemySteps: 1
   levelLayout:
   - values:
     - {fileID: 11400000, guid: a2cf55f5a7c054144898d054bf405217, type: 2}
