@@ -12,6 +12,7 @@ public class LevelController : MonoBehaviour
     [Space(10)]
     [SerializeField]private CollisionListener boundaryReachedListenerLeft;
     [SerializeField]private CollisionListener boundaryReachedListenerRight;
+    [SerializeField]private CollisionListener boundaryReachedListenerBottom;
     [SerializeField]private float colliderCooldown = 4;
 
     private GameObject _gridTransform;
@@ -40,6 +41,8 @@ public class LevelController : MonoBehaviour
         boundaryReachedListenerLeft.SetAsTrigger(true);
         boundaryReachedListenerRight.TriggerEnter += BoundaryEnterTriggerRight;
         boundaryReachedListenerRight.SetAsTrigger(true);
+        boundaryReachedListenerBottom.TriggerEnter += BoundaryEnterTriggerBottom;
+        boundaryReachedListenerBottom.SetAsTrigger(true);
 
         StartCoroutine(MoveEnemies());
     }
@@ -55,6 +58,13 @@ public class LevelController : MonoBehaviour
         if (!collider2D.GetComponent<EnemyController>()) return;
         DisableColliders();
         _currentEnemiesDirection = GameEnums.EnemiesDirection.Left;
+    }
+    private void BoundaryEnterTriggerBottom(Collider2D collider2D)
+    {
+        if (!collider2D.GetComponent<EnemyController>()) return;
+        _gameController.uiController.OpenLoseWindow();
+        enemiesCanMove = false;
+        StopAllCoroutines();
     }
 
     private void EnableColliders()

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+
 
 public class GameController : MonoBehaviourSingleton<GameController>
 {
@@ -16,6 +18,7 @@ public class GameController : MonoBehaviourSingleton<GameController>
     public int totalScore = 0;
     
     [HideInInspector] public int levelIndex = 0;
+    [HideInInspector] public List<GameObject> enemiesOnScreen = new List<GameObject>();
         
     public override void InitializeSingleton()
     {
@@ -33,4 +36,23 @@ public class GameController : MonoBehaviourSingleton<GameController>
         totalScore = 0;
         uiController.RestartScore();
     }
+
+    public void CheckForVictory()
+    {
+        if (enemiesOnScreen.Count <= 0)
+        {
+            uiController.OpenVictoryWindow();
+        }
+    }
+
+    public void ClearEnemiesList()
+    {
+        if (enemiesOnScreen.Count <= 0) return;
+        foreach (var t in enemiesOnScreen)
+        {
+            Destroy(t.gameObject);
+        }
+        enemiesOnScreen.Clear();
+    }
+    
 }

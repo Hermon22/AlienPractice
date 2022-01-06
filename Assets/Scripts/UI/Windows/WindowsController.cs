@@ -65,11 +65,18 @@ public class WindowsController : MonoBehaviour
     
     private void FadeOut()
     {
-        if (windowImages.Length <= 0) return;
-        foreach (var winImage in windowImages)
+        if (windowImages.Length > 0)
         {
-            StartCoroutine(Fade(false,winImage));
+            foreach (var winImage in windowImages)
+            {
+                StartCoroutine(Fade(false,winImage));
+            }
         }
+        else
+        {
+            ShrinkElements();
+        }
+       
     }
 
     private IEnumerator Fade(bool fadeIn, Image winImage)

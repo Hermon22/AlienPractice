@@ -11,6 +11,7 @@ public class GridController : MonoBehaviour
     
     public void DrawGrid(int currentLevelIndex)
     {
+        var enemiesCount = 0;
         for (var x = 0; x < columns; x += size)
         {
             for (var z = 0; z < rows; z += size)
@@ -22,7 +23,9 @@ public class GridController : MonoBehaviour
                 var point = GetNearestPointOnGrid(new Vector3((position.x + x), (position.y + z), 0f), Vector3.zero);
                 var tmp = Instantiate(GameController.Instance.listOfLevels[currentLevelIndex].levelLayout[z][x].Prefab, point, Quaternion.identity);
                 tmp.transform.parent = gameObject.transform;
-
+                tmp.GetComponent<EnemyController>().index = enemiesCount;
+                enemiesCount++;
+                GameController.Instance.enemiesOnScreen.Add(tmp);
             }
         }
     }
